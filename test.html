@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test JSON to TypeScript Converter</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      color: #333;
+      border-bottom: 3px solid #667eea;
+      padding-bottom: 10px;
+    }
+
+    .instructions {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .json-sample {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+      font-family: 'Monaco', 'Courier New', monospace;
+      white-space: pre;
+      overflow-x: auto;
+      user-select: all;
+    }
+
+    .step {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border-left: 4px solid #667eea;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .step-number {
+      display: inline-block;
+      background: #667eea;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    code {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Monaco', 'Courier New', monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🧪 Test JSON to TypeScript Converter Extension</h1>
+
+  <div class="instructions">
+    <h2>How to Test</h2>
+    <div class="step">
+      <span class="step-number">1</span>
+      <strong>Install the extension</strong> - Follow the installation instructions in the README.md
+    </div>
+    <div class="step">
+      <span class="step-number">2</span>
+      <strong>Select a JSON sample</strong> below (click and drag to select)
+    </div>
+    <div class="step">
+      <span class="step-number">3</span>
+      <strong>Right-click</strong> on the selected text
+    </div>
+    <div class="step">
+      <span class="step-number">4</span>
+      <strong>Click "Convert JSON to TypeScript Type"</strong> from the context menu
+    </div>
+    <div class="step">
+      <span class="step-number">5</span>
+      The extension popup will open with the converted TypeScript type!
+    </div>
+  </div>
+
+  <h2>Sample JSON Data</h2>
+
+  <h3>Sample 1: Model Mobil Section</h3>
+  <div class="json-sample">{
+    "key": "model_mobil",
+    "sort": 158,
+    "details": {
+    "status": true,
+    "description": "Temukan kendaraan yang sempurna untuk gaya hidup Anda.",
+    "title": "Temukan Model Terbaru dari Toyota"
+    }
+    }</div>
+
+  <h3>Sample 2: User Profile</h3>
+  <div class="json-sample">{
+    "key": "user_profile",
+    "id": 12345,
+    "name": "John Doe",
+    "email": "john@example.com",
+    "settings": {
+    "notifications": true,
+    "theme": "dark",
+    "language": "en"
+    },
+    "roles": ["admin", "editor"]
+    }</div>
+
+  <h3>Sample 3: Product Catalog</h3>
+  <div class="json-sample">{
+    "key": "product_item",
+    "productId": "ABC123",
+    "name": "Wireless Headphones",
+    "price": 99.99,
+    "inStock": true,
+    "specs": {
+    "color": "black",
+    "weight": 250,
+    "batteryLife": 24
+    },
+    "tags": ["electronics", "audio", "wireless"],
+    "reviews": [
+    {
+    "rating": 5,
+    "comment": "Great product!",
+    "author": "Alice"
+    }
+    ]
+    }</div>
+
+  <h3>Sample 4: API Response</h3>
+  <div class="json-sample">{
+    "key": "api_response",
+    "success": true,
+    "data": {
+    "items": [
+    {
+    "id": 1,
+    "title": "Item 1"
+    }
+    ],
+    "pagination": {
+    "page": 1,
+    "perPage": 10,
+    "total": 100
+    }
+    },
+    "timestamp": "2025-10-16T10:30:00Z"
+    }</div>
+
+  <h2>Alternative: Use the Popup</h2>
+  <div class="instructions">
+    <p>You can also click the extension icon in your Chrome toolbar to open the popup directly and paste any JSON there.
+    </p>
+  </div>
+</body>
+
+</html>

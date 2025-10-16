@@ -1,0 +1,17 @@
+{
+  "name": "json-to-typescript-converter",
+  "version": "1.0.0",
+  "description": "Chrome extension to convert JSON to TypeScript types",
+  "scripts": {
+    "zip": "zip -r extension.zip . -x '*.git*' -x 'node_modules/*' -x 'package*.json' -x '*.zip'"
+  },
+  "keywords": [
+    "chrome-extension",
+    "json",
+    "typescript",
+    "converter",
+    "type-generator"
+  ],
+  "author": "",
+  "license": "MIT"
+}

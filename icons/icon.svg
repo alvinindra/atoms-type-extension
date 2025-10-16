@@ -1,0 +1,23 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="128" height="128" rx="24" fill="url(#gradient)" />
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#667eea" />
+      <stop offset="1" stop-color="#764ba2" />
+    </linearGradient>
+  </defs>
+
+  <!-- Curly braces representing JSON -->
+  <path
+    d="M35 40C35 36 32 33 28 33C24 33 24 33 24 33V38C24 38 26 38 26 40V52C26 55 24 57 20 57V63C24 63 26 65 26 68V80C26 82 24 82 24 82V87C24 87 24 87 28 87C32 87 35 84 35 80V68C35 65 37 63 41 63V57C37 57 35 55 35 52V40Z"
+    fill="white" />
+
+  <!-- Bracket and "type" keyword -->
+  <path
+    d="M93 40C93 36 96 33 100 33C104 33 104 33 104 33V38C104 38 102 38 102 40V52C102 55 104 57 108 57V63C104 63 102 65 102 68V80C102 82 104 82 104 82V87C104 87 104 87 100 87C96 87 93 84 93 80V68C93 65 91 63 87 63V57C91 57 93 55 93 52V40Z"
+    fill="white" />
+
+  <!-- TS letters -->
+  <text x="64" y="72" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white"
+    text-anchor="middle">TS</text>
+</svg>

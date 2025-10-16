@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Keyboard Shortcut - JSON to TypeScript</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .instructions {
+      background: #e3f2fd;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      border-left: 4px solid #2196f3;
+    }
+
+    .instructions strong {
+      color: #1976d2;
+    }
+
+    .json-sample {
+      background: #263238;
+      color: #aed581;
+      padding: 20px;
+      border-radius: 5px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 14px;
+      margin: 20px 0;
+      white-space: pre-wrap;
+      cursor: text;
+      user-select: text;
+    }
+
+    .note {
+      background: #fff3cd;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      border-left: 4px solid #ffc107;
+      color: #856404;
+    }
+
+    .debug-info {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      border: 1px solid #dee2e6;
+      font-size: 13px;
+    }
+
+    .debug-info h3 {
+      margin-top: 0;
+      color: #495057;
+    }
+
+    .debug-info ol {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+
+    .debug-info li {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>🔍 Test Keyboard Shortcut</h1>
+    <p>Test the JSON to TypeScript converter keyboard shortcut</p>
+
+    <div class="instructions">
+      <strong>Instructions:</strong>
+      <ol>
+        <li>Select any JSON sample below (click and drag to select)</li>
+        <li>Press the keyboard shortcut:
+          <ul>
+            <li><strong>Mac:</strong> Control + Command + C</li>
+            <li><strong>Windows/Linux:</strong> Control + Shift + C</li>
+          </ul>
+        </li>
+        <li>Check for a notification at the top-right of the page</li>
+        <li>The TypeScript type should be copied to your clipboard</li>
+      </ol>
+    </div>
+
+    <h2>JSON Sample 1: Simple User Object</h2>
+    <div class="json-sample">{
+      "name": "John Doe",
+      "email": "john@example.com",
+      "age": 30,
+      "isActive": true
+      }</div>
+
+    <h2>JSON Sample 2: Nested Object</h2>
+    <div class="json-sample">{
+      "user": {
+      "id": 123,
+      "profile": {
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "avatar": "https://example.com/avatar.jpg"
+      },
+      "preferences": {
+      "theme": "dark",
+      "notifications": true
+      }
+      }
+      }</div>
+
+    <h2>JSON Sample 3: Array of Objects</h2>
+    <div class="json-sample">{
+      "products": [
+      {
+      "id": 1,
+      "name": "Laptop",
+      "price": 999.99,
+      "inStock": true,
+      "tags": ["electronics", "computers"]
+      }
+      ],
+      "total": 1
+      }</div>
+
+    <div class="debug-info">
+      <h3>🐛 Debugging Steps if Not Working:</h3>
+      <ol>
+        <li><strong>Open Chrome DevTools:</strong> Press F12 or right-click → Inspect</li>
+        <li><strong>Go to Console tab</strong> and look for these messages:
+          <ul>
+            <li>"Content script loaded on: ..." - Shows content script is injected</li>
+            <li>"Keyboard shortcut detected in content script!" - Shows shortcut was pressed</li>
+            <li>"Sending message to background script..." - Shows message is being sent</li>
+            <li>"Received response from background:" - Shows response received</li>
+          </ul>
+        </li>
+        <li><strong>Go to Extension's Service Worker:</strong>
+          <ul>
+            <li>Click the puzzle icon (Extensions) in Chrome toolbar</li>
+            <li>Click "Manage extensions"</li>
+            <li>Find "JSON to TypeScript Converter"</li>
+            <li>Click "service worker" link to open its console</li>
+            <li>Look for: "Message received in background:" and other debug logs</li>
+          </ul>
+        </li>
+        <li><strong>Check for errors:</strong> Any red error messages in either console</li>
+        <li><strong>Verify extension is enabled:</strong> chrome://extensions/</li>
+        <li><strong>Try reloading the extension:</strong> Click the reload icon on chrome://extensions/</li>
+      </ol>
+    </div>
+
+    <div class="note">
+      <strong>💡 Note:</strong> After reloading the extension, you must also reload this page for the content script to
+      be re-injected.
+    </div>
+  </div>
+
+  <script>
+    // Add visual feedback when text is selected
+    document.addEventListener('selectionchange', () => {
+      const selection = window.getSelection().toString();
+      if (selection) {
+        console.log('Selected text length:', selection.length);
+      }
+    });
+
+    // Log key presses for debugging
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'C')) {
+        console.log('Key combination detected:', {
+          ctrlKey: e.ctrlKey,
+          metaKey: e.metaKey,
+          shiftKey: e.shiftKey,
+          key: e.key,
+          code: e.code
+        });
+      }
+    }, true);
+  </script>
+</body>
+
+</html>

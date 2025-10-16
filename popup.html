@@ -17,9 +17,22 @@
 
     <div class="main-content">
       <div class="input-section">
-        <label for="jsonInput">JSON Input:</label>
-        <textarea id="jsonInput" placeholder='Paste your JSON here or right-click on selected JSON...'
-          rows="10"></textarea>
+        <div class="section-header">
+          <label for="jsonInput">JSON Input</label>
+          <span class="badge json-badge">JSON</span>
+          <button id="beautifyBtn" class="btn-beautify" title="Beautify JSON">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <path d="M4 4l4-3 4 3v3l-4 3-4-3V4z" stroke="currentColor" stroke-width="1.5" fill="none" />
+              <path d="M4 9l4 3 4-3" stroke="currentColor" stroke-width="1.5" fill="none" />
+            </svg>
+            Beautify
+          </button>
+        </div>
+        <div class="code-editor-wrapper">
+          <textarea id="jsonInput" placeholder='Paste your JSON here or right-click on selected JSON...' rows="10"
+            spellcheck="false"></textarea>
+          <pre id="jsonHighlight" class="code-highlight json-highlight" aria-hidden="true"></pre>
+        </div>
       </div>
 
       <div class="type-name-section">
@@ -43,7 +56,10 @@
 
       <div class="output-section">
         <div class="output-header">
-          <label>TypeScript Type:</label>
+          <div class="section-header">
+            <label>TypeScript Output</label>
+            <span class="badge ts-badge">TypeScript</span>
+          </div>
           <button id="copyBtn" class="btn-copy" title="Copy to clipboard">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path
@@ -53,7 +69,7 @@
             Copy
           </button>
         </div>
-        <pre id="output" class="output-code"></pre>
+        <pre id="output" class="output-code ts-highlight"></pre>
       </div>
 
       <div id="errorMsg" class="error-message"></div>

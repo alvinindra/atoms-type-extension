@@ -7,7 +7,7 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, sans-serif;
-  width: 600px;
+  width: 650px;
   min-height: 500px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #333;
@@ -50,13 +50,55 @@ header h1 {
 
 label {
   display: block;
-  margin-bottom: 8px;
   font-weight: 600;
   font-size: 14px;
   color: #4a5568;
 }
 
-textarea,
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.json-badge {
+  background: #fbbf24;
+  color: #78350f;
+}
+
+.ts-badge {
+  background: #3178c6;
+  color: white;
+}
+
+.btn-beautify {
+  background: #8b5cf6;
+  color: white;
+  padding: 4px 10px;
+  font-size: 11px;
+  margin-left: auto;
+}
+
+.btn-beautify:hover {
+  background: #7c3aed;
+}
+
+.btn-beautify svg {
+  width: 12px;
+  height: 12px;
+}
+
 input[type="text"] {
   width: 100%;
   padding: 12px;
@@ -65,18 +107,70 @@ input[type="text"] {
   font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
   font-size: 13px;
   transition: border-color 0.2s;
-  resize: vertical;
 }
 
-textarea:focus,
 input[type="text"]:focus {
   outline: none;
   border-color: #667eea;
 }
 
-textarea {
-  min-height: 120px;
-  background: #f7fafc;
+/* Code editor wrapper with syntax highlighting */
+.code-editor-wrapper {
+  position: relative;
+  width: 100%;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: #1e1e1e;
+  transition: border-color 0.2s;
+}
+
+.code-editor-wrapper:focus-within {
+  border-color: #667eea;
+}
+
+.code-editor-wrapper textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  resize: vertical;
+  background: transparent;
+  color: transparent;
+  caret-color: #d4d4d4;
+  position: relative;
+  z-index: 2;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto;
+}
+
+.code-editor-wrapper textarea:focus {
+  outline: none;
+}
+
+.code-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 140px;
+  padding: 14px;
+  margin: 0;
+  border: none;
+  border-radius: 8px;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  pointer-events: none;
+  z-index: 1;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto;
+  background: transparent;
 }
 
 .input-group {
@@ -151,20 +245,21 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
 }
 
 .output-code {
-  background: #1e293b;
-  color: #e2e8f0;
-  padding: 16px;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 14px;
   border-radius: 8px;
-  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", monospace;
   font-size: 13px;
-  min-height: 150px;
+  min-height: 160px;
   overflow-x: auto;
   white-space: pre;
   line-height: 1.6;
+  border: 2px solid #e2e8f0;
+  margin-top: 8px;
 }
 
 .output-code:empty {
@@ -224,4 +319,60 @@ textarea::-webkit-scrollbar-thumb:hover,
 
 .btn-secondary:active svg {
   transform: rotate(180deg);
+}
+
+/* JSON Syntax Highlighting */
+.json-highlight .json-key {
+  color: #9cdcfe;
+}
+
+.json-highlight .json-string {
+  color: #ce9178;
+}
+
+.json-highlight .json-number {
+  color: #b5cea8;
+}
+
+.json-highlight .json-boolean {
+  color: #569cd6;
+}
+
+.json-highlight .json-null {
+  color: #569cd6;
+}
+
+.json-highlight .json-punctuation {
+  color: #d4d4d4;
+}
+
+/* TypeScript Syntax Highlighting */
+.ts-highlight .ts-keyword {
+  color: #569cd6;
+  font-weight: 500;
+}
+
+.ts-highlight .ts-type {
+  color: #4ec9b0;
+}
+
+.ts-highlight .ts-property {
+  color: #9cdcfe;
+}
+
+.ts-highlight .ts-primitive {
+  color: #4ec9b0;
+}
+
+.ts-highlight .ts-punctuation {
+  color: #d4d4d4;
+}
+
+.ts-highlight .ts-bracket {
+  color: #ffd700;
+}
+
+.ts-highlight .ts-interface-name {
+  color: #4ec9b0;
+  font-weight: 600;
 }

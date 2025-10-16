@@ -13,7 +13,7 @@ function generateTypeDefinition(obj, typeName, indent = 0) {
   let result = ""
 
   if (indent === 0) {
-    result = `type ${typeName} = `
+    result = `export type ${typeName} = `
   }
 
   if (Array.isArray(obj)) {
@@ -80,17 +80,19 @@ function generateDefaultTypeName(jsonString) {
   try {
     const obj = JSON.parse(jsonString)
 
+    // Try to find a 'key' field first and append "Section"
+    if (obj && typeof obj === "object" && !Array.isArray(obj)) {
+      if (obj.key && typeof obj.key === "string") {
+        return toPascalCase(obj.key) + "Section"
+      }
+    }
+
     // If JSON is an object, use the first key as the type name
     if (obj && typeof obj === "object" && !Array.isArray(obj)) {
       const keys = Object.keys(obj)
       if (keys.length > 0) {
         return toPascalCase(keys[0])
       }
-    }
-
-    // Try to find a 'key' field
-    if (obj.key && typeof obj.key === "string") {
-      return toPascalCase(obj.key)
     }
 
     // Try to use other common identifying fields

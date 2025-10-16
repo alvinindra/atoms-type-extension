@@ -14,13 +14,17 @@ A Chrome extension that converts JSON objects into TypeScript type definitions. 
 
 📋 **One-Click Copy** - Copy generated TypeScript types to clipboard instantly
 
+🔧 **Auto Beautify** - JSON is automatically formatted when loaded via context menu
+
+⌨️ **Keyboard Shortcuts** - Convert selected JSON and copy TypeScript with Control+Cmd+C (Mac) or Control+Shift+C (Windows/Linux)
+
 ## Installation
 
 ### Install from Source
 
 1. **Clone or download this repository**
    ```bash
-   cd /Users/antikode/Work/atoms-type-extension
+   cd /Users/Work/atoms-type-extension
    ```
 
 2. **Open Chrome and navigate to extensions**
@@ -46,7 +50,7 @@ A Chrome extension that converts JSON objects into TypeScript type definitions. 
 2. **Right-click** on the selected text
 3. **Click "Convert JSON to TypeScript Type"**
 4. The extension popup will open with:
-   - Your JSON already pasted
+   - Your JSON already pasted and **automatically beautified**
    - Auto-generated type name (based on the `key` field)
    - TypeScript type definition ready to copy
 
@@ -57,6 +61,13 @@ A Chrome extension that converts JSON objects into TypeScript type definitions. 
 3. **Enter a type name** (or click the auto-generate button)
 4. **Click "Convert"**
 5. **Click "Copy"** to copy the TypeScript type to your clipboard
+
+### Method 3: Keyboard Shortcut
+
+1. **Select JSON text** on any webpage
+2. **Press Control+Cmd+C** (Mac) or **Control+Shift+C** (Windows/Linux)
+3. The JSON will be converted to TypeScript and **automatically copied to your clipboard**
+4. A notification will confirm the conversion and copy
 
 ## Example
 
@@ -110,6 +121,7 @@ If no `key` field is found, it looks for other common fields like `name`, `id`, 
 ## Keyboard Shortcuts
 
 - **Ctrl+Enter** in the JSON input textarea to convert
+- **Control+Cmd+C** (Mac) or **Control+Shift+C** (Windows/Linux) to convert selected JSON on any webpage and copy the TypeScript result
 
 ## Development
 
@@ -158,6 +170,10 @@ Feel free to submit issues, fork the repository, and create pull requests for an
 MIT License - feel free to use this extension in your projects!
 
 ## Changelog
+
+### Version 1.1.0
+- ✨ **Auto Beautify** - JSON is now automatically beautified when loaded via context menu
+- ⌨️ **Quick Convert Shortcut** - Added keyboard shortcut Control+Cmd+C (Mac) or Control+Shift+C (Windows/Linux) to convert selected JSON and copy TypeScript result directly from any webpage
 
 ### Version 1.0.0
 - Initial release

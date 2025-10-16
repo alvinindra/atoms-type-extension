@@ -4,7 +4,7 @@ A Chrome extension that converts JSON objects into TypeScript type definitions. 
 
 ## 🌐 Try it Online
 
-**[Launch Web Version →](https://yourusername.github.io/atoms-type-extension/)**
+**[Launch Web Version →](https://alvinindra.github.io/atoms-type-extension/)**
 
 No installation required! Use the web version directly in your browser. For advanced features like context menus and keyboard shortcuts, install the Chrome extension below.
 

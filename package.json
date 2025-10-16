@@ -1,6 +1,6 @@
 {
-  "name": "json-to-typescript-converter",
-  "version": "1.1.0",
+  "name": "atoms-type-extension",
+  "version": "1.2.0",
   "description": "Chrome extension to convert JSON to TypeScript types",
   "scripts": {
     "zip": "zip -r extension.zip . -x '*.git*' -x 'node_modules/*' -x 'package*.json' -x '*.zip'"
@@ -12,6 +12,6 @@
     "converter",
     "type-generator"
   ],
-  "author": "",
+  "author": "Alvin Indra Pratama",
   "license": "MIT"
 }

@@ -2,6 +2,12 @@
 
 A Chrome extension that converts JSON objects into TypeScript type definitions. Right-click on selected JSON or use the popup interface to generate TypeScript types with customizable names.
 
+## 🌐 Try it Online
+
+**[Launch Web Version →](https://yourusername.github.io/atoms-type-extension/)**
+
+No installation required! Use the web version directly in your browser. For advanced features like context menus and keyboard shortcuts, install the Chrome extension below.
+
 ## Features
 
 ✨ **Context Menu Integration** - Right-click on selected JSON text to convert it instantly
@@ -17,6 +23,8 @@ A Chrome extension that converts JSON objects into TypeScript type definitions. 
 🔧 **Auto Beautify** - JSON is automatically formatted when loaded via context menu
 
 ⌨️ **Keyboard Shortcuts** - Convert selected JSON and copy TypeScript with Control+Cmd+C (Mac) or Control+Shift+C (Windows/Linux)
+
+🎯 **Custom Fields Arrays** - Convert JSON with `custom_fields` arrays into multiple type definitions with page-specific naming
 
 ## Installation
 
@@ -68,6 +76,62 @@ A Chrome extension that converts JSON objects into TypeScript type definitions. 
 2. **Press Control+Cmd+C** (Mac) or **Control+Shift+C** (Windows/Linux)
 3. The JSON will be converted to TypeScript and **automatically copied to your clipboard**
 4. A notification will confirm the conversion and copy
+
+### Method 4: Custom Fields Arrays Mode
+
+For JSON objects containing a `custom_fields` array, this mode generates TypeScript types for each field's content:
+
+1. **Click the extension icon** in your Chrome toolbar
+2. **Check the "Custom Fields Arrays" checkbox**
+3. **Enter a page name** (e.g., "Home", "About", "Product")
+4. **Paste your JSON** with a `custom_fields` array (each item must have a `key` field)
+5. **Click "Convert"**
+6. Each field's `details` (or content) will be converted to a separate type named `{PageName}{Key}Section`
+
+**Supports both formats:**
+- Direct: `{ "custom_fields": [...] }`
+- Nested: `{ "data": { "custom_fields": [...] } }`
+
+**Example Input:**
+```json
+{
+  "custom_fields": [
+    {
+      "key": "cover",
+      "sort": 166,
+      "details": {
+        "status": true,
+        "banner_list": []
+      }
+    },
+    {
+      "key": "video",
+      "sort": 163,
+      "details": {
+        "status": true,
+        "label": "Video Section",
+        "video_option": []
+      }
+    }
+  ]
+}
+```
+
+**Example Output (Page Name: "Home"):**
+```typescript
+export type HomeCoverSection = {
+  status: boolean;
+  banner_list: any[]
+};
+
+export type HomeVideoSection = {
+  status: boolean;
+  label: string;
+  video_option: any[]
+};
+```
+
+**Note:** The output includes only the section content (the `details` field), not the field metadata like `key` or `sort`.
 
 ## Example
 
@@ -170,6 +234,11 @@ Feel free to submit issues, fork the repository, and create pull requests for an
 MIT License - feel free to use this extension in your projects!
 
 ## Changelog
+
+### Version 1.2.0
+- 🎯 **Custom Fields Arrays Mode** - New feature to convert `custom_fields` arrays into multiple page-specific type definitions
+- 📝 **Page Name Input** - Add custom page names to generate types like `HomeCoverSection`, `HomeVideoSection`, etc.
+- ✨ **Batch Type Generation** - Generate multiple TypeScript types from a single JSON input
 
 ### Version 1.1.0
 - ✨ **Auto Beautify** - JSON is now automatically beautified when loaded via context menu

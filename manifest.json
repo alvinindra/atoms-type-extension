@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "JSON to TypeScript Converter",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Convert JSON to TypeScript types with a right-click context menu",
   "permissions": [
     "contextMenus",

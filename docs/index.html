@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8">
@@ -40,169 +40,126 @@
 </head>
 
 <body>
-  <div class="page-wrapper">
-    <div class="hero-section">
-      <div class="hero-content">
-        <h1 class="hero-title">JSON to TypeScript Converter</h1>
-        <p class="hero-subtitle">Convert JSON objects into TypeScript type definitions instantly</p>
-        <div class="hero-features">
-          <span class="feature-tag">✨ Smart Type Generation</span>
-          <span class="feature-tag">🎨 Syntax Highlighting</span>
-          <span class="feature-tag">📋 One-Click Copy</span>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <h1 class="app-title">JSON to TypeScript</h1>
+      </div>
+      <div class="header-right">
+        <button id="themeToggle" class="btn-icon" title="Toggle theme">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <a href="https://github.com/alvinindra/atoms-type-extension" target="_blank" rel="noopener" class="btn-icon"
+          title="GitHub">
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+            </path>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Editor Area -->
+    <main class="editor-container">
+      <!-- Left Panel - JSON Input -->
+      <div class="editor-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="panel-label">JS Object</span>
+          </div>
+          <div class="panel-actions">
+            <button id="settingsBtn" class="btn-panel" title="Settings">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                </path>
+              </svg>
+              Settings
+            </button>
+            <button id="beautifyBtn" class="btn-panel" title="Auto-format JSON">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4 17 10 11 4 5"></polyline>
+                <line x1="12" y1="19" x2="20" y2="19"></line>
+              </svg>
+            </button>
+            <button id="clearBtn" class="btn-panel" title="Clear">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Settings Dropdown -->
+        <div id="settingsDropdown" class="settings-dropdown" style="display: none;">
+          <div class="settings-row">
+            <label for="typeName">Type Name:</label>
+            <input type="text" id="typeName" placeholder="Root" value="Root" />
+          </div>
+          <div class="settings-row">
+            <label class="checkbox-label">
+              <input type="checkbox" id="customFieldsCheckbox" />
+              <span class="checkbox-text">Custom Fields Arrays</span>
+            </label>
+          </div>
+          <div class="settings-row" id="pageNameRow" style="display: none;">
+            <label for="pageName">Page Name:</label>
+            <input type="text" id="pageName" placeholder="Home" />
+          </div>
+        </div>
+
+        <div class="code-area">
+          <div class="line-numbers" id="inputLineNumbers"></div>
+          <div class="code-editor">
+            <pre id="jsonHighlight" class="code-highlight json-highlight"></pre>
+            <textarea id="jsonInput" class="code-input" placeholder="Paste your JSON here..."
+              spellcheck="false"></textarea>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="main-content">
-        <div class="input-section">
-          <div class="section-header">
-            <label for="jsonInput">JSON Input</label>
-            <span class="badge json-badge">JSON</span>
-            <button id="beautifyBtn" class="btn-beautify" title="Beautify JSON">
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                <path d="M4 4l4-3 4 3v3l-4 3-4-3V4z" stroke="currentColor" stroke-width="1.5" fill="none" />
-                <path d="M4 9l4 3 4-3" stroke="currentColor" stroke-width="1.5" fill="none" />
-              </svg>
-              Beautify
-            </button>
+      <!-- Right Panel - TypeScript Output -->
+      <div class="editor-panel">
+        <div class="panel-header">
+          <div class="panel-title">
+            <span class="panel-label">TypeScript</span>
           </div>
-          <div class="code-editor-wrapper">
-            <textarea id="jsonInput" placeholder='Paste your JSON here...' rows="10" spellcheck="false"></textarea>
-            <pre id="jsonHighlight" class="code-highlight json-highlight" aria-hidden="true"></pre>
-          </div>
-        </div>
-
-        <div class="type-name-section">
-          <label for="typeName">Type Name:</label>
-          <div class="input-group">
-            <input type="text" id="typeName" placeholder="GeneratedType" />
-            <button id="autoGenerateBtn" class="btn-secondary" title="Auto-generate from JSON key">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M13.65 2.35C12.2 0.9 10.21 0 8 0 3.58 0 0 3.58 0 8s3.58 8 8 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L9 7h7V0l-2.35 2.35z"
-                  fill="currentColor" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <div class="options-section">
-          <label class="checkbox-container">
-            <input type="checkbox" id="customFieldsCheckbox" />
-            <span class="checkmark"></span>
-            <span class="checkbox-label">Custom Fields Arrays</span>
-          </label>
-        </div>
-
-        <div class="page-name-section" id="pageNameSection" style="display: none;">
-          <label for="pageName">Page Name:</label>
-          <input type="text" id="pageName" placeholder="Home" />
-        </div>
-
-        <div class="button-group">
-          <button id="convertBtn" class="btn-primary">Convert</button>
-          <button id="clearBtn" class="btn-secondary">Clear</button>
-        </div>
-
-        <div class="output-section">
-          <div class="output-header">
-            <div class="section-header">
-              <label>TypeScript Output</label>
-              <span class="badge ts-badge">TypeScript</span>
-            </div>
+          <div class="panel-actions">
             <button id="copyBtn" class="btn-copy" title="Copy to clipboard">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M10 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V11H2V2H10V0ZM13 3H5C4.46957 3 3.96086 3.21071 3.58579 3.58579C3.21071 3.96086 3 4.46957 3 5V14C3 14.5304 3.21071 15.0391 3.58579 15.4142C3.96086 15.7893 4.46957 16 5 16H13C13.5304 16 14.0391 15.7893 14.4142 15.4142C14.7893 15.0391 15 14.5304 15 14V5C15 4.46957 14.7893 3.96086 14.4142 3.58579C14.0391 3.21071 13.5304 3 13 3ZM13 14H5V5H13V14Z"
-                  fill="currentColor" />
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
               Copy
             </button>
           </div>
-          <pre id="output" class="output-code ts-highlight"></pre>
         </div>
-
+        <div class="code-area">
+          <div class="line-numbers" id="outputLineNumbers"></div>
+          <pre id="output" class="code-output"></pre>
+        </div>
         <div id="errorMsg" class="error-message"></div>
       </div>
-
-      <div class="features-section">
-        <h2>Features</h2>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h3>Smart Type Names</h3>
-            <p>Automatically generates type names based on JSON structure and key fields</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">✏️</div>
-            <h3>Custom Names</h3>
-            <p>Rename your types to match your naming conventions</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🔧</div>
-            <h3>Auto Beautify</h3>
-            <p>JSON is automatically formatted for better readability</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h3>Custom Fields Arrays</h3>
-            <p>Convert JSON with custom_fields arrays into multiple type definitions</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="example-section">
-        <h2>Example</h2>
-        <div class="example-grid">
-          <div class="example-box">
-            <h4>Input JSON</h4>
-            <pre class="example-code">{
-  "key": "model_mobil",
-  "sort": 158,
-  "details": {
-    "status": true,
-    "description": "Find the perfect vehicle",
-    "title": "Latest Models"
-  }
-}</pre>
-          </div>
-          <div class="example-box">
-            <h4>Output TypeScript</h4>
-            <pre class="example-code">export type ModelMobilSection = {
-  key: string;
-  sort: number;
-  details: {
-    status: boolean;
-    description: string;
-    title: string
-  }
-};</pre>
-          </div>
-        </div>
-      </div>
-
-      <footer class="footer">
-        <p>Made with ❤️ for TypeScript developers</p>
-        <div class="footer-links">
-          <a href="https://github.com/alvinindra/atoms-type-extension" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
-              <path
-                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
-              </path>
-            </svg>
-            GitHub
-          </a>
-          <a href="https://chrome.google.com/webstore" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z" />
-            </svg>
-            Chrome Extension
-          </a>
-        </div>
-      </footer>
-    </div>
+    </main>
   </div>
 
   <script src="converter.js"></script>

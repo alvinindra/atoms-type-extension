@@ -1,6 +1,3 @@
-// Content script to handle keyboard shortcuts on web pages
-console.log("Content script loaded on:", window.location.href)
-
 // Listen for keyboard events
 document.addEventListener(
   "keydown",

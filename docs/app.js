@@ -8,6 +8,9 @@ const typeName = document.getElementById("typeName")
 const pageName = document.getElementById("pageName")
 const pageNameRow = document.getElementById("pageNameRow")
 const customFieldsCheckbox = document.getElementById("customFieldsCheckbox")
+const monoTypeCheckbox = document.getElementById("monoTypeCheckbox")
+const monoPrefixRow = document.getElementById("monoPrefixRow")
+const monoPrefixInput = document.getElementById("monoPrefix")
 const settingsBtn = document.getElementById("settingsBtn")
 const settingsDropdown = document.getElementById("settingsDropdown")
 const beautifyBtn = document.getElementById("beautifyBtn")
@@ -16,10 +19,13 @@ const copyBtn = document.getElementById("copyBtn")
 const themeToggle = document.getElementById("themeToggle")
 const errorMsg = document.getElementById("errorMsg")
 
+const SETTINGS_KEY = "atomsTypeSettings"
+
 let convertTimer = null
 
 // Initialize
 initTheme()
+loadSettings()
 updateLineNumbers(jsonInput, inputLineNumbers)
 updateLineNumbers(output, outputLineNumbers)
 updateJsonHighlight()
@@ -41,8 +47,20 @@ output.addEventListener("scroll", () => {
   outputLineNumbers.scrollTop = output.scrollTop
 })
 
-typeName.addEventListener("input", scheduleConvert)
-pageName.addEventListener("input", scheduleConvert)
+typeName.addEventListener("input", () => {
+  saveSettings()
+  scheduleConvert()
+})
+pageName.addEventListener("input", () => {
+  saveSettings()
+  scheduleConvert()
+})
+monoPrefixInput.addEventListener("input", () => {
+  saveSettings()
+  if (monoTypeCheckbox.checked) {
+    scheduleConvert()
+  }
+})
 
 settingsBtn.addEventListener("click", () => {
   const isVisible = settingsDropdown.style.display !== "none"
@@ -50,7 +68,14 @@ settingsBtn.addEventListener("click", () => {
 })
 
 customFieldsCheckbox.addEventListener("change", () => {
-  pageNameRow.style.display = customFieldsCheckbox.checked ? "flex" : "none"
+  applyMonoTypeState()
+  saveSettings()
+  scheduleConvert()
+})
+
+monoTypeCheckbox.addEventListener("change", () => {
+  applyMonoTypeState()
+  saveSettings()
   scheduleConvert()
 })
 
@@ -91,6 +116,63 @@ function updateJsonHighlight() {
     return
   }
   jsonHighlight.innerHTML = highlightJSON(text)
+}
+
+function loadSettings() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || "{}")
+    if (typeof saved.monoType === "boolean") {
+      monoTypeCheckbox.checked = saved.monoType
+    }
+    if (typeof saved.monoPrefix === "string") {
+      monoPrefixInput.value = saved.monoPrefix
+    }
+    if (typeof saved.typeName === "string") {
+      typeName.value = saved.typeName
+    }
+    if (typeof saved.pageName === "string") {
+      pageName.value = saved.pageName
+    }
+    if (typeof saved.customFields === "boolean") {
+      customFieldsCheckbox.checked = saved.customFields
+    }
+    applyMonoTypeState()
+  } catch (error) {
+    // Ignore corrupted saved data
+    console.error("Failed to load settings", error)
+  }
+}
+
+function saveSettings() {
+  const settings = {
+    monoType: monoTypeCheckbox.checked,
+    monoPrefix: monoPrefixInput.value,
+    typeName: typeName.value,
+    pageName: pageName.value,
+    customFields: customFieldsCheckbox.checked,
+  }
+
+  try {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings))
+  } catch (error) {
+    console.error("Failed to save settings", error)
+  }
+}
+
+function applyMonoTypeState() {
+  const isMono = monoTypeCheckbox.checked
+  if (isMono) {
+    customFieldsCheckbox.checked = false
+    customFieldsCheckbox.disabled = true
+    pageNameRow.style.display = "none"
+    monoPrefixRow.style.display = "flex"
+    monoPrefixInput.disabled = false
+  } else {
+    customFieldsCheckbox.disabled = false
+    pageNameRow.style.display = customFieldsCheckbox.checked ? "flex" : "none"
+    monoPrefixRow.style.display = "none"
+    monoPrefixInput.disabled = true
+  }
 }
 
 function highlightJSON(code) {
@@ -147,7 +229,14 @@ function convertJSON() {
   try {
     let result
 
-    if (customFieldsCheckbox.checked) {
+    const isMono = monoTypeCheckbox.checked
+    const useCustomFields = !isMono && customFieldsCheckbox.checked
+
+    if (isMono) {
+      const typeNameValue = typeName.value.trim() || "Root"
+      const prefix = monoPrefixInput.value.trim()
+      result = jsonToTypeScriptMono(json, typeNameValue, prefix)
+    } else if (useCustomFields) {
       const pageNameValue =
         pageName.value.trim() || getDefaultPageName(json) || "Page"
       result = jsonToTypeScriptCustomFields(json, pageNameValue)

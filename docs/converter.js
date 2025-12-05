@@ -8,6 +8,16 @@ function jsonToTypeScript(jsonString, typeName = "GeneratedType") {
   }
 }
 
+// Convert JSON to TypeScript interfaces (mono output)
+function jsonToTypeScriptMono(jsonString, rootName = "Root", prefix = "") {
+  try {
+    const obj = JSON.parse(jsonString)
+    return generateInterfaceDefinitions(obj, rootName, prefix)
+  } catch (error) {
+    throw new Error("Invalid JSON: " + error.message)
+  }
+}
+
 function generateTypeDefinition(obj, typeName, indent = 0) {
   const indentStr = "  ".repeat(indent)
   let result = ""
@@ -73,6 +83,90 @@ function generateTypeDefinition(obj, typeName, indent = 0) {
   }
 
   return result
+}
+
+function generateInterfaceDefinitions(obj, rootName, prefix = "") {
+  const interfaces = []
+  const usedNames = new Set()
+  const built = new Set()
+  const prefixPascal = toPascalCase(prefix || "")
+
+  const addPrefix = (name) => {
+    if (!prefixPascal) return name
+    return `${prefixPascal}${name}`
+  }
+
+  const ensureUniqueName = (baseName) => {
+    const base = addPrefix(baseName || "Type")
+    let name = base
+    let counter = 2
+    while (usedNames.has(name)) {
+      name = `${base}${counter}`
+      counter += 1
+    }
+    usedNames.add(name)
+    return name
+  }
+
+  const singularize = (name) => {
+    if (!name) return name
+    const lower = name.toLowerCase()
+    if (lower.endsWith("status") || lower.endsWith("us") || lower.endsWith("ss")) return name
+    if (lower.endsWith("ies")) return name.slice(0, -3) + "y"
+    if (lower.endsWith("s")) return name.slice(0, -1)
+    return name
+  }
+
+  const formatKey = (key) => {
+    const safeKey = String(key)
+    const identifierPattern = /^[$A-Z_][0-9A-Z_$]*$/i
+    if (identifierPattern.test(safeKey)) return safeKey
+    return `"${safeKey.replace(/"/g, '\\"')}"`
+  }
+
+  const formatInterface = (name, fields) => {
+    const lines = fields.map(([key, type]) => `  ${formatKey(key)}: ${type}`)
+    return `export interface ${name} {\n${lines.join("\n")}\n}`
+  }
+
+  const buildInterface = (value, nameHint) => {
+    const interfaceName = ensureUniqueName(
+      toPascalCase(nameHint || rootName || "Root")
+    )
+    if (built.has(interfaceName)) return interfaceName
+    built.add(interfaceName)
+
+    const fields = Object.entries(value || {}).map(([key, val]) => {
+      const fieldType = resolveType(val, key)
+      return [key, fieldType]
+    })
+
+    interfaces.push(formatInterface(interfaceName, fields))
+    return interfaceName
+  }
+
+  const resolveType = (value, keyHint) => {
+    if (Array.isArray(value)) {
+      if (value.length === 0) return "any[]"
+      const itemType = resolveType(value[0], singularize(keyHint || "Item"))
+      return `${itemType}[]`
+    }
+
+    if (value === null) return "any"
+
+    const valueType = typeof value
+    if (valueType === "object") {
+      const nestedName = keyHint ? singularize(keyHint) : "Nested"
+      return buildInterface(value, nestedName)
+    }
+    if (valueType === "string") return "string"
+    if (valueType === "number") return "number"
+    if (valueType === "boolean") return "boolean"
+    return "any"
+  }
+
+  buildInterface(obj, rootName)
+  return interfaces.join("\n\n")
 }
 
 // Generate default type name from JSON key
@@ -170,6 +264,7 @@ function jsonToTypeScriptCustomFields(jsonString, pageName = "Page") {
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     jsonToTypeScript,
+    jsonToTypeScriptMono,
     generateDefaultTypeName,
     jsonToTypeScriptCustomFields,
     toPascalCase,
